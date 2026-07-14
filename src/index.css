@@ -514,6 +514,7 @@ h2 {
 
 .task-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 16px;
   padding: 16px 20px;
@@ -523,6 +524,39 @@ h2 {
   box-shadow: var(--shadow-card);
   transition: all var(--transition-normal);
   animation: fadeIn var(--transition-normal);
+}
+
+.task-item__main-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.task-item__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+}
+
+.task-item__category-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-sidebar-border);
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.task-item__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .task-item:hover {
@@ -1939,6 +1973,40 @@ h2 {
 
   .task-form__submit-btn {
     width: 100%;
+  }
+
+  /* Mobile Task Item Card Layout */
+  .task-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .task-item__main-row {
+    width: 100%;
+  }
+
+  .task-item__meta-row {
+    width: 100%;
+    margin-right: 0;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .task-item__actions {
+    width: 100%;
+    justify-content: flex-end;
+    border-top: 1px dashed var(--card-border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .task-item__actions button {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
   }
 
   /* Make profile details grid 1 column on mobile */

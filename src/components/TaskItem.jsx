@@ -46,34 +46,43 @@ export default function TaskItem({ task, dispatch }) {
 
   return (
     <li className={`task-item ${task.done ? 'task-item--done' : ''}`}>
-      <input type="checkbox" checked={task.done} onChange={handleToggle} />
+      <div className="task-item__main-row">
+        <input type="checkbox" checked={task.done} onChange={handleToggle} />
 
-      {editing ? (
-        <input
-          className="task-item__edit-input"
-          value={draftTitle}
-          onChange={(e) => setDraftTitle(e.target.value)}
-        />
-      ) : (
-        <span className="task-item__title">{task.title}</span>
-      )}
+        {editing ? (
+          <input
+            className="task-item__edit-input"
+            value={draftTitle}
+            onChange={(e) => setDraftTitle(e.target.value)}
+          />
+        ) : (
+          <span className="task-item__title">{task.title}</span>
+        )}
+      </div>
 
-      <span className={`task-item__priority task-item__priority--${task.priority}`}>
-        {task.priority}
-      </span>
-
-      {task.dueDate && (
-        <span className={`task-item__due-badge task-item__due-badge--${dueStatusClass}`}>
-          📅 {dueLabel}: {task.dueDate}
+      <div className="task-item__meta-row">
+        <span className="task-item__category-badge">
+          📁 {task.category || 'General'}
         </span>
-      )}
+        <span className={`task-item__priority task-item__priority--${task.priority}`}>
+          {task.priority}
+        </span>
 
-      {editing ? (
-        <button onClick={handleSaveEdit}>Save</button>
-      ) : (
-        <button onClick={() => setEditing(true)}>Edit</button>
-      )}
-      <button onClick={handleDelete}>Delete</button>
+        {task.dueDate && (
+          <span className={`task-item__due-badge task-item__due-badge--${dueStatusClass}`}>
+            📅 {dueLabel}: {task.dueDate}
+          </span>
+        )}
+      </div>
+
+      <div className="task-item__actions">
+        {editing ? (
+          <button onClick={handleSaveEdit}>Save</button>
+        ) : (
+          <button onClick={() => setEditing(true)}>Edit</button>
+        )}
+        <button onClick={handleDelete}>Delete</button>
+      </div>
     </li>
   );
 }
