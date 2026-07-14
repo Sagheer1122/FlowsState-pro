@@ -10,6 +10,7 @@ import PomodoroTimer from './components/PomodoroTimer.jsx';
 import NotificationCenter from './components/NotificationCenter.jsx';
 import UserProfile from './components/UserProfile.jsx';
 import AiCopilot from './components/AiCopilot.jsx';
+import OnboardingModal from './components/OnboardingModal.jsx';
 import { taskReducer, initialTaskState } from './reducers/taskReducer.js';
 import { fetchTasks } from './data/mockApi.js';
 
@@ -37,6 +38,7 @@ function AppShell() {
       </div>
       <NotificationCenter />
       <AiCopilot dispatch={dispatch} />
+      <OnboardingModal />
     </div>
   );
 }

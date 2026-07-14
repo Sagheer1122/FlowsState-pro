@@ -3,20 +3,38 @@ import { createContext, useContext, useState } from 'react';
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({
-    name: 'Sagheer',
-    role: 'Product Engineer',
-    email: 'sagheer@taskflow.pro',
-    department: 'Product Development',
-    tasksCompleted: 12
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('flowstate_user');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        // ignore parsing error
+      }
+    }
+    return {
+      name: '', // Empty name triggers onboarding modal!
+      role: 'Productivity Builder',
+      email: 'member@flowstate.pro',
+      department: 'General Operations',
+      tasksCompleted: 0
+    };
   });
 
   function updateProfile(updatedData) {
-    setUser((prev) => ({ ...prev, ...updatedData }));
+    setUser((prev) => {
+      const merged = { ...prev, ...updatedData };
+      localStorage.setItem('flowstate_user', JSON.stringify(merged));
+      return merged;
+    });
   }
 
   function incrementTasksCompleted() {
-    setUser((prev) => ({ ...prev, tasksCompleted: prev.tasksCompleted + 1 }));
+    setUser((prev) => {
+      const merged = { ...prev, tasksCompleted: prev.tasksCompleted + 1 };
+      localStorage.setItem('flowstate_user', JSON.stringify(merged));
+      return merged;
+    });
   }
 
   return (
